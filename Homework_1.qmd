@@ -12,7 +12,7 @@ execute:
 editor: visual
 ---
 
-## Introduction
+## Introduction:
 
 The `ToothGrowth` dataset is a built-in dataset in R. It examines the effect of Vitamin C on tooth growth in 60 guinea pigs. The experiment compares two supplement types\
 - **orange juice (OJ)**\
@@ -21,7 +21,7 @@ administered at three dose levels: 0.5, 1, and 2 mg/day.
 
 This dataset is commonly used for visualizing grouped data and performing basic exploratory data analysis.
 
-## Dataset Description
+## Dataset Description:
 
 The dataset contains 3 variables:
 
@@ -31,7 +31,7 @@ The dataset contains 3 variables:
 
 These variables allow us to compare how both the supplement type and dosage level affect tooth growth in guinea pigs.
 
-## Summary Statistics
+## Summary Statistics:
 
 ```{r}
 summary(ToothGrowth)
@@ -39,9 +39,9 @@ summary(ToothGrowth)
 
 This summary shows the range and distribution of tooth length values for different doses and supplement types.
 
-## Plot
+## Plot:
 
-The bar plot below displays the average tooth length for each combination of supplement type and dose level.
+The bar plot below depicts the average tooth length for each combination of supplement type and dose level.
 
 ```{r}
 #| warning: false
@@ -70,13 +70,13 @@ ggplot(avg_len, aes(x = dose, y = mean_len, fill = supp)) +
   theme_minimal()
 ```
 
-## Explanation
+## Explanation:
 
 -   The bar plot visualizes how tooth growth varies by dose and supplement type.
 -   Bars are grouped by supplement type for each dose level.
 -   Custom colors improve clarity: orange for Orange Juice and blue for Vitamin C.
 
-## Interpretation
+## Interpretation:
 
 -   Tooth growth increases as the dose increases.
 -   At lower doses, Orange Juice results in more growth than Vitamin C.
