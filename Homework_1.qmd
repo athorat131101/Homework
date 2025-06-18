@@ -1,0 +1,85 @@
+---
+title: "Homework_1"
+author: "Aishwarya Thorat - 24211250"
+format: 
+  pdf:
+    documentclass: article
+    geometry: margin=1.5in
+execute:
+  echo: false
+  warning: false
+  message: false
+editor: visual
+---
+
+## Introduction
+
+The `ToothGrowth` dataset is a built-in dataset in R. It examines the effect of Vitamin C on tooth growth in 60 guinea pigs. The experiment compares two supplement types\
+- **orange juice (OJ)**\
+- **ascorbic acid (VC)**\
+administered at three dose levels: 0.5, 1, and 2 mg/day.
+
+This dataset is commonly used for visualizing grouped data and performing basic exploratory data analysis.
+
+## Dataset Description
+
+The dataset contains 3 variables:
+
+-   **`len`**: Tooth length (numeric)
+-   **`supp`**: Supplement type – Orange Juice (`OJ`) or Vitamin C (`VC`)
+-   **`dose`**: Dose of vitamin C in milligrams per day (numeric: 0.5, 1, 2)
+
+These variables allow us to compare how both the supplement type and dosage level affect tooth growth in guinea pigs.
+
+## Summary Statistics
+
+```{r}
+summary(ToothGrowth)
+```
+
+This summary shows the range and distribution of tooth length values for different doses and supplement types.
+
+## Plot
+
+The bar plot below displays the average tooth length for each combination of supplement type and dose level.
+
+```{r}
+#| warning: false
+library(ggplot2)
+library(dplyr)
+
+# Modify supplement names and calculate group means
+avg_len <- ToothGrowth %>%
+  mutate(supp = recode(supp, OJ = "Orange Juice", VC = "Vitamin C")) %>%
+  group_by(supp, dose) %>%
+  summarise(mean_len = mean(len), .groups = "drop")
+
+avg_len$dose <- as.factor(avg_len$dose)
+
+ggplot(avg_len, aes(x = dose, y = mean_len, fill = supp)) +
+  geom_bar(stat = "identity", position = position_dodge(width = 0.7), width = 0.2) +
+  labs(
+    title = "Average Tooth Length by Supplement Type and Dose",
+    x = "Dose (mg/day)",
+    y = "Mean Tooth Length (mm)",
+    fill = "Supplement"
+  ) +
+  scale_fill_manual(
+    values = c("Orange Juice" = "#FFA500", "Vitamin C" = "#1E90FF")
+  ) +
+  theme_minimal()
+```
+
+## Explanation
+
+-   The bar plot visualizes how tooth growth varies by dose and supplement type.
+-   Bars are grouped by supplement type for each dose level.
+-   Custom colors improve clarity: orange for Orange Juice and blue for Vitamin C.
+
+## Interpretation
+
+-   Tooth growth increases as the dose increases.
+-   At lower doses, Orange Juice results in more growth than Vitamin C.
+-   At the highest dose (2 mg/day), both supplements produce similar growth.
+
+This indicates that dose has a stronger effect on growth than supplement type, especially at high levels.
